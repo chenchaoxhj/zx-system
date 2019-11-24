@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zx.warehouse.mapper.CompanyInfoMapper">
+    <insert id="addCompanyInfo" parameterType="com.zx.warehouse.pojo.CompanyModel">
+        insert into company_info (company_id,company_num,company_name) values (#{companyId},#{companyNum},#{companyName})
+    </insert>
+
+    <select id="getCompanyInfos" resultType="com.zx.warehouse.pojo.CompanyModel">
+        select * from company_info
+        <trim prefix="where" prefixOverrides="and">
+            <if test="companyId != null and companyId !=''">
+                company_id=#{companyId}
+            </if>
+        </trim>
+    </select>
+
+    <insert id="addDepartmentInfo" parameterType="com.zx.warehouse.pojo.DeptModel">
+        insert into department_info (dept_id,company_id,dept_num,dept_name) values (#{deptId},#{companyId},#{deptNum},#{deptName})
+    </insert>
+</mapper>
